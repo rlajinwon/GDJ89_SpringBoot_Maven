@@ -24,7 +24,7 @@ public class QnaDAOTest {
 		qnaVO.setBoardContents("contetnts3");
 		qnaDAO.add(qnaVO);
 		
-		//qnaDAO.refUpdate(qnaVO);
+		qnaDAO.refUpdate(qnaVO);
 	}
 	
 
