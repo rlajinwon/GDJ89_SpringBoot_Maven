@@ -19,12 +19,14 @@ public class QnaDAOTest {
 		
 		
 		QnaVO qnaVO = new QnaVO();
-		qnaVO.setUserName("user");
-		qnaVO.setBoardTitle("title");
-		qnaVO.setBoardContents("contetnts");
+		qnaVO.setUserName("user3");
+		qnaVO.setBoardTitle("title3");
+		qnaVO.setBoardContents("contetnts3");
 		qnaDAO.add(qnaVO);
 		
-		qnaDAO.refUpdate(qnaVO);
+		//qnaDAO.refUpdate(qnaVO);
 	}
+	
+
 	
 }

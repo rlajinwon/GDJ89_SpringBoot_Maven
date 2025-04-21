@@ -146,7 +146,6 @@
 	WHERE BOARD_NUM=#{boardNum}
 	
 	
-	
 	</delete>
 
 	<update id="update" parameterType="NoticeVO">

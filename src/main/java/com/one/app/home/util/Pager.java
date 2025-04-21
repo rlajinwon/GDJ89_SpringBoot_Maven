@@ -64,7 +64,7 @@ public class Pager {
 	
 	//시작번호 끝번호 계산 
 	public void makeNum() {
-		this.startNum= (this.getPage()-1)*this.getPerPage()+1;
+		this.startNum= (this.getPage()-1)*this.getPerPage();
 		this.endNum = (this.getPage()*this.getPerPage());
 	}
 
