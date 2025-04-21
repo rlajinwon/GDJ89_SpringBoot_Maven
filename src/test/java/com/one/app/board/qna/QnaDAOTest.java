@@ -3,8 +3,10 @@ package com.one.app.board.qna;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
+@Transactional(rollbackFor = Exception.class)
 public class QnaDAOTest {
 
 	

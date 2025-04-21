@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.one.app.board.BoardFileVO;
@@ -15,6 +16,7 @@ import com.one.app.home.util.Pager;
 
 
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class QnaService implements BoardService{
 
 	@Override

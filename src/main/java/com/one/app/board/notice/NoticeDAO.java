@@ -11,8 +11,10 @@ import com.one.app.board.BoardVO;
 public interface NoticeDAO extends BoardDAO{
 
 	
+	public int refUpdate(BoardVO boardVO) throws Exception;
 	
 	public int test(List<BoardVO> ar) throws Exception;
+	
 	
 	
 }
