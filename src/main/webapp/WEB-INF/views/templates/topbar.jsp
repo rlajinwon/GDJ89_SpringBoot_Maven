@@ -48,6 +48,11 @@
                     
                    <c:if test="${not empty user}">
                     <ul class="navbar-nav ml-auto">
+                    
+                    <div>
+                    	<li class="nav-item mx-1"><a href="/users/logout">로그아웃</a></li>
+                    	
+                    </div>
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                         <li class="nav-item dropdown no-arrow d-sm-none">

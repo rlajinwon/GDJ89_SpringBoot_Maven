@@ -9,16 +9,22 @@
 
 
 	<insert id="join" parameterType="UserVO">
-
-	INSERT INTO USER_TBL
-	VALUES(#{username},#{password},#{name},#{phone},#{email},#{birth},#{fileName},#{oriName})
-
+		INSERT INTO USER_TBL
+		(username,
+		password, name, phone, email, birth, file_name, ori_name)
+		VALUES
+		(#{username}, #{password}, #{name}, #{phone}, #{email}, #{birth},
+		#{fileName},
+		#{oriName})
 	</insert>
 
 
+
+
 	<select id="detail" resultType="UserVO" parameterType="UserVO">
-		SELECT * FROM USER_TBL WHERE USERNAME =#{username}
-	
+		SELECT *
+		FROM USER_TBL WHERE USERNAME =#{username}
+
 	</select>
 
 

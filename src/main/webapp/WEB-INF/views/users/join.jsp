@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html>
@@ -45,49 +46,74 @@
 									<div class="col-lg-7">
 										<div class="p-5">
 											<div class="text-center">
-												<h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+												<h1 class="h4 text-gray-900 mb-4">회원가입</h1>
 											</div>
-											<form class="user" method="post" enctype="multipart/form-data"
+											
+											<form:form modelAttribute="userVO" cssClass="user" method="post" enctype="multipart/form-data"
 												action="${pageContext.request.contextPath}/users/join">
 												<div class="form-group row">
 													<div class="col">
-														<input type="text" name="username"
-															class="form-control form-control-user" id="username"
-															placeholder="아이디">
+														<form:input path="username"
+															cssClass="form-control form-control-user" id="username"
+															placeholder="아이디"></form:input>
+															<div>
+																<form:errors path="username"></form:errors>
+															</div>
 													</div>
 
 
 												</div>
 
 												<div class="form-group row">
-													<div class="col-sm-6 mb-3 mb-sm-0">
-														<input type="password" name="password"
-															class="form-control form-control-user"
-															id="exampleInputPassword" placeholder="비밀번호">
-													</div>
 													<div class="col-sm-6">
-														<input type="password" name="password"
-															class="form-control form-control-user"
-															id="exampleRepeatPassword" placeholder="비밀번호 확인">
+														<form:password path="password"
+															cssClass="form-control form-control-user"
+															id="exampleInputPassword" placeholder="비밀번호"></form:password>
+																<div>
+																<form:errors path="password"></form:errors>
+															</div>
 													</div>
+											 		<div class="col-sm-6">
+														<form:password path="passwordCheck"
+															cssClass="form-control form-control-user"
+															id="exampleRepeatPassword" placeholder="비밀번호 확인"></form:password>
+																	<div>
+															</div>
+						
+													</div> 
+												</div>
+													<div class="form-group">
+													<form:input path="name"
+														cssClass="form-control form-control-user"
+														id="name" placeholder="이름"></form:input>
+														
+												</div>
+
+
+												<div class="form-group">
+													<form:input path="phone"
+														cssClass="form-control form-control-user"
+														id="exampleInputPhone" placeholder="핸드폰 번호"></form:input>
 												</div>
 
 												<div class="form-group">
-													<input type="text" name="email"
-														class="form-control form-control-user"
-														id="exampleInputEmail" placeholder="이메일">
+													<form:input path="email"
+														cssClass="form-control form-control-user"
+														id="email" placeholder="이메일"></form:input>
+																<div>
+																<form:errors path="email"></form:errors>
+															</div>
 												</div>
-
-												<div class="form-group">
-													<input type="text" name="phone"
-														class="form-control form-control-user"
-														id="exampleInputPhone" placeholder="핸드폰 번호">
-												</div>
-
+												
 												<div class="form-group">
 													<input type="date" name="birth"
 														class="form-control form-control-user"
 														id="exampleInputDate" placeholder="생년월일">
+														<div>
+																<form:errors path="birth"></form:errors>
+															</div>
+														
+														
 												</div>
 												
 											             
@@ -110,7 +136,7 @@
 													class="btn btn-facebook btn-user btn-block"> <i
 													class="fab fa-facebook-f fa-fw"></i> Register with Facebook
 												</a>
-											</form>
+											</form:form>
 											<hr>
 											<div class="text-center">
 												<a class="small" href="forgot-password.html">Forgot
