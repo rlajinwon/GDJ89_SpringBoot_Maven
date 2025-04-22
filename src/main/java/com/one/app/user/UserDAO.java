@@ -11,6 +11,6 @@ public interface UserDAO {
 	
 	public int join(UserVO userVO) throws Exception;
 	
-	public UserVO getDetail(UserVO userVO) throws Exception;
+	public UserVO detail(UserVO userVO) throws Exception;
 	
 }

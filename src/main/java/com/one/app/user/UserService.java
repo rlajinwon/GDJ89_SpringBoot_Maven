@@ -38,14 +38,15 @@ public class UserService {
 		
 	}
 	
-	public UserVO login(UserVO userVO) throws Exception{
+	public UserVO detail(UserVO userVO) throws Exception{
 		
-		UserVO result = userDAO.getDetail(userVO);
+		UserVO result = userDAO.detail(userVO);
 		
 		if(userVO != null) {
 			if(result.getPassword().equals(userVO.getPassword())) {
 				return result;
 			}
+			result =null;
 		}
 	
 		return null;

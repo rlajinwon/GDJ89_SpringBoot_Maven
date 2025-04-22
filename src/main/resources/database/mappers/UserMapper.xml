@@ -8,7 +8,7 @@
 <mapper namespace="com.one.app.user.UserDAO">
 
 
-	<insert id="join" parameterType="userVO">
+	<insert id="join" parameterType="UserVO">
 
 	INSERT INTO USER_TBL
 	VALUES(#{username},#{password},#{name},#{phone},#{email},#{birth},#{fileName},#{oriName})
@@ -16,7 +16,7 @@
 	</insert>
 
 
-	<select id="getDetail" resultType="userVO">
+	<select id="detail" resultType="UserVO" parameterType="UserVO">
 		SELECT * FROM USER_TBL WHERE USERNAME =#{username}
 	
 	</select>

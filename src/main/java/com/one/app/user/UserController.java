@@ -46,11 +46,10 @@ public class UserController {
 	
 	@PostMapping("login")
 	public String login(UserVO userVO,HttpSession session) throws Exception{
-		userVO = userService.login(userVO);
+		userVO = userService.detail(userVO);
 		
 		if(userVO != null) {
 			session.setAttribute("user", userVO);
-			return "redirect:/";
 		}
 		
 		return "redirect:./login";

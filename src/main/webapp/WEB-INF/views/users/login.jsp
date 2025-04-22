@@ -52,7 +52,7 @@
                                     </div>
                                     <form class="user" action="./login" method="post">
                                         <div class="form-group">
-                                            <input type="username" name="username" class="form-control form-control-user"
+                                            <input type="text" name="username" class="form-control form-control-user"
                                                 id="username" aria-describedby="emailHelp"
                                                 placeholder="이름">
                                         </div>
