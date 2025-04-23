@@ -2,7 +2,10 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +13,8 @@
 <meta charset="UTF-8">
 <c:import url="/WEB-INF/views/templates/header.jsp"></c:import>
 <title>마이페이지 - 회원정보 수정</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/mypage.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/mypage.css">
 </head>
 <body id="page-top">
 
@@ -23,49 +27,28 @@
 
 				<div class="container-fluid">
 
-					<h2 class="mb-4">회원정보 수정</h2>
+					<h3 class="mb-4">마이페이지</h3>
 
-					<div class="card shadow p-4">
-						<form:form modelAttribute="userVO" method="post" enctype="multipart/form-data"
-							action="${pageContext.request.contextPath}/users/update">
-							
-							<div class="mb-3">
-								<label for="username" class="form-label">아이디</label>
-								<input type="text" class="form-control" id="username" name="username" value="${user.username}" readonly />
-							</div>
+					<h3>
+						ID :
+						<sec:authentication property="name" />
+					</h3>
+					<sec:authentication property="principal" var="user" />
+					<h3>EMAIL :${user.email}</h3>
+					<h3>
+						<sec:authentication property="principal.phone" />
+					</h3>
+					<h3>
+						<sec:authentication property="principal.birth" />
+					</h3>
+					<h3>
+						<sec:authentication property="principal.birth" />
+					</h3>
+					<img
+						src="/files/user/<sec:authentication property='principal.fileName'/>"
+						alt="프로필 이미지" class="rounded-circle"
+						style="width: 150px; height: 150px; object-fit: cover;" />
 
-							<div class="mb-3">
-								<label for="name" class="form-label">이름</label>
-								<input type="text" class="form-control" id="name" name="name" value="${user.name}" />
-								<form:errors path="name" cssClass="text-danger" />
-							</div>
-
-							<div class="mb-3">
-								<label for="email" class="form-label">이메일</label>
-								<input type="email" class="form-control" id="email" name="email" value="${user.email}" />
-								<form:errors path="email" cssClass="text-danger" />
-							</div>
-
-							<div class="mb-3">
-								<label for="phone" class="form-label">전화번호</label>
-								<input type="text" class="form-control" id="phone" name="phone" value="${user.phone}" />
-								<form:errors path="phone" cssClass="text-danger" />
-							</div>
-
-							<div class="mb-3">
-								<label for="birth" class="form-label">생년월일</label>
-								<input type="date" class="form-control" id="birth" name="birth" value="${user.birth}" />
-								<form:errors path="birth" cssClass="text-danger" />
-							</div>
-
-							<div class="mb-3">
-								<label for="avatar" class="form-label">프로필 이미지</label>
-								<input type="file" class="form-control" id="avatar" name="avatar" />
-							</div>
-
-							<button type="submit" class="btn btn-primary">정보 수정</button>
-						</form:form>
-					</div>
 
 				</div>
 			</div>
@@ -73,7 +56,8 @@
 		</div>
 	</div>
 
-	<a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
+	<a class="scroll-to-top rounded" href="#page-top"><i
+		class="fas fa-angle-up"></i></a>
 	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 </body>
 </html>

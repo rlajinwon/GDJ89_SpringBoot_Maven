@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -130,14 +131,15 @@
 
 									</ul>
 								</nav>
-								
-								
-								<div>
-									<a href="./add" class="btn btn-dark">글 작성</a>
-								</div>
-								
-								
-								
+
+
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<div>
+										<a href="./add" class="btn btn-dark">글 작성</a>
+									</div>
+								</sec:authorize>
+
+
 
 							</div>
 						</div>

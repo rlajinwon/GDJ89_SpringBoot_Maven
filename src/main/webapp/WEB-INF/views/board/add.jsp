@@ -52,9 +52,9 @@
     			</div>
     
                   
+                  <button type="submit" class="btn btn-primary mt-3">작성</button>
                   
 
-                  <button type="submit" class="btn btn-primary mt-3">작성</button>
                   <a href="/notice/list" class="btn btn-secondary mt-3">목록으로</a>
                </form>
 
