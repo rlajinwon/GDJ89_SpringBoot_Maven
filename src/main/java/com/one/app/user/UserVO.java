@@ -4,11 +4,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -23,7 +25,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserVO implements UserDetails {
+public class UserVO implements UserDetails, OAuth2User {
 
 
 
@@ -47,8 +49,22 @@ public class UserVO implements UserDetails {
 	
 	private List<RoleVO> list;
 	
+	// oau2user 
+	private Map<String, Object> attributes;
+	
+	private String accessToken;
+	
+	private String sns;
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	// oau2user
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -88,7 +104,8 @@ public class UserVO implements UserDetails {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
+
+
 	
 	
 	

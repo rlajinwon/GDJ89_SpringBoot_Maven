@@ -47,7 +47,7 @@ public class SecurityLoginFailHandler implements AuthenticationFailureHandler{
 			
 			//response.sendRedirect("/user/login?message=".concat(message));
 			request.setAttribute("code", message);
-			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/user/login.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/users/login.jsp");
 			view.forward(request, response);
 			
 		}

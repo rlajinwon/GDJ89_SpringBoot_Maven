@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.one.app.user.UserService;
+import com.one.app.user.UserSocialService;
 
 @Configuration
 @EnableWebSecurity //(debug = true)
@@ -22,6 +23,8 @@ public class SecurityConfig {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UserSocialService userSocialService;
 	
 	
 	
@@ -59,13 +62,20 @@ public class SecurityConfig {
 						.anyRequest().permitAll();
 					})
 					
-					// Form 관련 설정 
 					
+					/** Form 관련 설정**/
 					.formLogin(formlogin ->{
-						formlogin.loginPage("/users/login")
-						.defaultSuccessUrl("/")
-						.failureUrl("/users/login")
-						.permitAll();
+						formlogin
+						.loginPage("/users/login")
+						//username, password
+						//.usernameParameter("id")
+						//.passwordParameter("pw")
+						//.defaultSuccessUrl("/")
+						.successHandler(loginSuccessHandler)
+						//.failureUrl("/user/login")
+						.failureHandler(loginFailHandler)
+						.permitAll()
+						;
 					})
 					
 					// Logout 관련 설정 
@@ -93,13 +103,22 @@ public class SecurityConfig {
 						.invalidSessionUrl("/")
 						.maximumSessions(1)
 						.maxSessionsPreventsLogin(false)
-						.expiredUrl("/user/login")
+						.expiredUrl("/users/login")
+						.maxSessionsPreventsLogin(false)
 						;
 						
 					})
+					.oauth2Login(oauth2Login->{
+						oauth2Login
+						.userInfoEndpoint(use->{
+							use.userService(userSocialService);
+						});
+						
+						
+						
+					});
 					
 					
-					;
 					
 		return httpSecurity.build();
 		
