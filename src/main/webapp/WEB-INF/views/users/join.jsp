@@ -51,6 +51,7 @@
 											
 											<form:form modelAttribute="userVO" cssClass="user" method="post" enctype="multipart/form-data"
 												action="${pageContext.request.contextPath}/users/join">
+												<input type="hidden" value="${_csrf.token}" name="{_csrf.parameterName}">
 												<div class="form-group row">
 													<div class="col">
 														<form:input path="username"
