@@ -56,8 +56,7 @@ public class UserVO implements UserDetails, OAuth2User {
 	
 	private String sns;
 	
-	
-	
+
 	
 	
 	

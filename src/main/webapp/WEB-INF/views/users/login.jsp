@@ -53,7 +53,8 @@
                                         <h1 class="h4 text-gray-900 mb-4">로그인</h1>
                                           <h3><spring:message code="${code}" text=""></spring:message></h3>
                                     </div>
-                                    <form class="user" action="./login" method="post">
+                                    <form class="user" method="post" enctype="multipart/form-data">
+                                    	<input type="hidden" value="${_csrf.token}" name="${_csrf.parameterName}">
                                         <div class="form-group">
                                             <input type="text" name="username" class="form-control form-control-user"
                                                 id="username" aria-describedby="emailHelp"

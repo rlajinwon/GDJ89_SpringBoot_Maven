@@ -26,6 +26,8 @@ public class SecurityConfig {
 	@Autowired
 	private UserSocialService userSocialService;
 	
+	@Autowired
+	private SecurityLogoutHandler securityLogoutHandler;
 	
 	
 
@@ -82,7 +84,8 @@ public class SecurityConfig {
 					.logout(logout ->{
 						logout
 						.logoutUrl("/users/logout")
-						.logoutSuccessUrl("/")
+//						.logoutSuccessUrl("/")
+						.addLogoutHandler(securityLogoutHandler)
 						.invalidateHttpSession(true)
 						.permitAll();
 					})
