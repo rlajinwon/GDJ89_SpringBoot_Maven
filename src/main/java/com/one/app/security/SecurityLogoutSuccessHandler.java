@@ -1,53 +1,49 @@
 package com.one.app.security;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.one.app.user.UserVO;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 
-
-
 @Component
 @Slf4j
-public class SecurityLogoutHandler implements LogoutHandler {
+public class SecurityLogoutSuccessHandler implements LogoutSuccessHandler{
+	
 	
 	@Value("${spring.security.oauth2.client.registration.kakao.client-secret}")
 	private String adminKey;
 	
 	
-
+	
+	
+	
+	
 	@Override
-	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 
-		log.info("Auth : {}", authentication);
-		
-		// social 로그인일 경우 Logout 요청 진행 
-		if(authentication instanceof OAuth2AuthenticationToken) {
-			UserVO userVO =(UserVO)authentication.getPrincipal();
-			log.info("Social 사용자 : {} ", userVO.getSns());
-			
-			if(userVO.getSns().toUpperCase().equals("KAKAO")) {
-				this.kakaoLogout(userVO);
-				
-			}
-			
-			
-		}
-		
-	} // logout End 
+	
 	
 	
 	
@@ -68,9 +64,9 @@ public class SecurityLogoutHandler implements LogoutHandler {
 				
 			.post() //메서드 형식 
 			.uri("https://kapi.kakao.com/v1/user/logout")
-			 .header("Authorization", "Bearer" + userVO.getAccessToken())
-//			.header("Authorization", "KaKaoAK " + adminKey)
-	//		.bodyValue(map)
+//			 .header("Authorization", "Bearer" + userVO.getAccessToken())
+			.header("Authorization", "KaKaoAK " + adminKey)
+			.bodyValue(map)
 			 .retrieve()
 			 .bodyToMono(String.class)
 			 ;
@@ -78,11 +74,5 @@ public class SecurityLogoutHandler implements LogoutHandler {
 		log.info("Result {}",res.block());
 										
 	}
-	
-	
-	
-	
-	
-	
 
 }

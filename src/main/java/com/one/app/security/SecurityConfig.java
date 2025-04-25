@@ -30,6 +30,9 @@ public class SecurityConfig {
 	private SecurityLogoutHandler securityLogoutHandler;
 	
 	
+	
+
+	
 
 	//정적 자원들은 security에서 제외 
 
