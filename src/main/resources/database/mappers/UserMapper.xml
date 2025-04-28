@@ -8,6 +8,18 @@
 <mapper namespace="com.one.app.user.UserDAO">
 
 
+	<update id="statusChange" parameterType="UserVO">
+		UPDATE USER_TBL SET STATUS =#{status} WHERE USERNAME =#{username}
+	
+	
+	</update>
+
+
+
+
+
+
+
 	<insert id="join" parameterType="UserVO">
 		INSERT INTO USER_TBL
 		(username,
@@ -52,10 +64,19 @@
 			<result column="ROLE_NAME" property="roleName"/>
 		</collection>
 	
-	
-	
+
 	
 	</resultMap>
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
 
 
 

@@ -13,4 +13,5 @@ public interface UserDAO {
 	
 	public UserVO detail(UserVO userVO) throws Exception;
 	
+	public int statusChange(UserVO userVO) throws Exception;
 }

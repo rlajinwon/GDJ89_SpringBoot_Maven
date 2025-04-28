@@ -3,6 +3,7 @@ package com.one.app.websocket;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,9 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.one.app.user.UserVO;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -20,11 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatHandler implements WebSocketHandler{
 	
 	//소켓으로 연결된 전체 유저
+	//BroadCast
 	private List<WebSocketSession> list = new ArrayList<>();
 	
-	//1ㄷ1 채팅
-	private Map<String,List<WebSocketSession>> room = new HashMap<>();
+	private Map<String,WebSocketSession> users = new HashMap<>();
 	
+	private Map<Long, StringBuffer> messages = new HashMap<>();
 	
 
 	@Override
@@ -36,6 +41,10 @@ public class ChatHandler implements WebSocketHandler{
 		log.info("p:{}",session.getPrincipal());
 		list.add(session);
 		
+//		UserVO userVO = (UserVO)session.getPrincipal();
+//		users.put(userVO.getUsername(), session);
+		users.put(session.getPrincipal().getName(), session);
+		
 		
 		
 	}
@@ -45,17 +54,24 @@ public class ChatHandler implements WebSocketHandler{
 		// TODO Auto-generated method stub
 		// WebSocket으로 연결 된 Client가 메세지를 송신 했을 때 실행 
 		
+		log.info("message : {}",message);
 		log.info("m : {}", message.getPayload());
 		
+		ObjectMapper objectMapper = new ObjectMapper();
+		MessageVO messageVO = objectMapper.readValue(message.getPayload().toString(), MessageVO.class);
+		log.info("memssageVo : {}", messageVO);
 
-		list.forEach(s ->{
-			try {
-				s.sendMessage(message);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
+		if(!messages.containsKey(messageVO.getRoomNum())) {
+			StringBuffer sb = new StringBuffer();
+			sb.append(message.getPayload());
+			messages.put(messageVO.getRoomNum(),sb);
+		}else {
+			messages.get(messageVO.getRoomNum()).append(message.getPayload());
+		}
+
+		users.get(messageVO.getReceiver()).sendMessage(message);
+		users.get(messageVO.getSender()).sendMessage(message);
+	
 		
 	}
 

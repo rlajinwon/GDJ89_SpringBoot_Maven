@@ -98,7 +98,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="/chat">
+                <a class="nav-link" href="/chat/list">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Chat</span></a>
             </li>
