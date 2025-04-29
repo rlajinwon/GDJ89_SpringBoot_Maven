@@ -25,7 +25,7 @@
 		(username,
 		password, name, phone, email, birth, file_name, ori_name)
 		VALUES
-		(#{username}, #{password}, #{name}, #{phone}, #{email}, #{birth},
+			(#{username}, #{password}, #{name}, #{phone}, #{email}, #{birth},
 		#{fileName},
 		#{oriName})
 	</insert>

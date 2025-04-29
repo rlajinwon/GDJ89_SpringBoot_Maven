@@ -1,40 +1,38 @@
 
-const websocket = new WebSocket("/ws/chat")
 const send = document.getElementById("send")
 const message = document.getElementById("message")
 const receivername = document.getElementsByClassName("receiver-name");
 const rec = document.getElementById("receiver")
 const chatBody = document.getElementById("chat-body");
-const chat = document.getElementById("chat");
+const chat = document.getElementById("chat")
 
 for(let r of receivername){
     r.addEventListener("click", ()=>{
         let receiver=r.getAttribute("data-receiver-name");
-        let sender = chat.getAttribute("data-sender-name");
-
+        let sender = chat.getAttribute("data-sender-name")
         rec.value=receiver;
         chatBody.innerHTML="";
 
         fetch(`/chat/room?receiver=${receiver}&sender=${sender}`)
-        .then(r=>r.json())
-        .then(r=>{
-          console.log(r);
-          r.array.forEach(e => {
-            let d = makeData(e);
-            chatBody.append(d);
-          });
-        })
-        .catch(e=>{
-          console.log(e)
-        })
+            .then(r=>r.json())
+            .then(r=>{
+                console.log(r)
+                r.forEach(e => {
+                    let d = makeData(e);
+                    chatBody.append(d);
+                });
+            })
+            .catch(e=>{
+                console.log(e)
+            })
+
 
         
-
-
         
     })
 }
 
+const websocket = new WebSocket("/ws/chat")
 
 //webSocket 연결이 되었을 때
 websocket.onopen=()=>{
@@ -47,6 +45,20 @@ websocket.onopen=()=>{
 websocket.onmessage=(m)=>{
     //
     let result =JSON.parse(m.data)
+
+    let start = result.sender(); 
+
+    let end = result.receiver();
+
+    let my = chat.getAttribute("data-sender-name") // 내 정보
+
+    let re = rec.value; // 현재 채팅하고 있는 상대방 정보 
+    if(start != my && start != re){
+        return;
+    }
+    
+
+
     let r = makeData(result);
     chatBody.append(r)
 }

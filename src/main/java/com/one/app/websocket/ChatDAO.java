@@ -13,6 +13,9 @@ public interface ChatDAO {
 	
 	List<MessageVO> room(MessageVO messageVO) throws Exception;
 	
-	int makeRoom(MessageVO messageVO) throws Exception;
+	int addChat(MessageVO messageVO) throws Exception;
+	
+	
+	int add(List<MessageVO> list) throws Exception;
 	
 }

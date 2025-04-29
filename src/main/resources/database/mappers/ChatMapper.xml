@@ -3,34 +3,51 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 
 <mapper namespace="com.one.app.websocket.ChatDAO">
 
-	<select id="room" parameterType="MessageVO" resultType="MessageVO">
+	<select id="room" parameterType="MessageVO"
+		resultType="MessageVO">
 		SELECT * FROM CHAT_TBL
 		WHERE
-			 SENDER=#{sender} AND RECEIVER=#{receiver}
-		 	 OR 
-		 	 RECEIVER=#{receiver} AND SENDER=#{sender}
-		 ORDER BY CHAT_TIME ASC
-	
+		SENDER=#{sender} AND RECEIVER=#{receiver}
+		OR
+		SENDER=#{receiver} AND RECEIVER=#{sender}
+		ORDER BY CHAT_TIME ASC
+
 	</select>
 
 
 	<select id="getList" resultType="UserVO">
-		SELECT USERNAME, NAME, FILE_NAME,STATUS FROM USER_TBL
-	
+		SELECT USERNAME, NAME,
+		FILE_NAME,STATUS FROM USER_TBL
+
 	</select>
 
 
-	<insert id="makeRoom" parameterType="MessageVO">
-	
-		INSERT INTO CHAT_TBL VAULES
-		(null,#{roomNum},#{sender},#{receiver},null,NOW())
-	
-	
+	<insert id="addChat" parameterType="MessageVO">
+
+		INSERT INTO CHAT_TBL VALUES
+		(null,#{roomNum},#{sender},#{receiver},#{body},NOW())
+
+
 	</insert>
+
+
+	<insert id="add" parameterType="java.util.List">
+		INSERT INTO CHAT_TBL
+		(CHAT_NUM,ROOM_NUM, SENDER, RECEIVER, BODY, CHAT_TIME)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(null,#{item.roomNum}, #{item.sender}, #{item.receiver},
+			#{item.body}, NOW())
+		</foreach>
+	</insert>
+
+
+
+
 
 
 

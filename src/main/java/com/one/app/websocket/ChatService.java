@@ -18,6 +18,8 @@ public class ChatService {
 	
 	@Autowired
 	private ChatDAO chatDAO;
+	
+
 
     ChatService(WebSecurityCustomizer customizer) {
         this.customizer = customizer;
@@ -29,17 +31,19 @@ public class ChatService {
 		
 		return list;
 		
-		
 	}
 	
 	List<MessageVO> room(MessageVO messageVO) throws Exception{
 		
 		List<MessageVO> list = chatDAO.room(messageVO);
 		
+		
+	
+		
 		if(list.size()==0) {
 			Calendar calendar = Calendar.getInstance();
 			messageVO.setRoomNum(calendar.getTimeInMillis());
-			chatDAO.makeRoom(messageVO);
+			chatDAO.addChat(messageVO);
 			
 			
 		}
@@ -47,7 +51,11 @@ public class ChatService {
 		return list;
 		
 		
+	
 	}
+	
+	
+	
 	
 	
 	
