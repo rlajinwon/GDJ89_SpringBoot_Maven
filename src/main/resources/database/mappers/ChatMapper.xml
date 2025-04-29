@@ -7,6 +7,19 @@
 
 <mapper namespace="com.one.app.websocket.ChatDAO">
 
+	<!-- memo SELECT-->
+	<select id="getMemoList" parameterType="MessageVO" resultType="MessageVO">
+	SELECT * FROM CHAT_TBL 
+	WHERE RECEIVER=#{receiver} AND STATUS='3' AND READ_STATUS='0'	
+	ORDER BY CHAT_NUM DESC
+	</select>
+	
+
+
+
+
+
+
 	<select id="room" parameterType="MessageVO"
 		resultType="MessageVO">
 		SELECT * FROM CHAT_TBL
@@ -14,6 +27,8 @@
 		SENDER=#{sender} AND RECEIVER=#{receiver}
 		OR
 		SENDER=#{receiver} AND RECEIVER=#{sender}
+		AND
+		STATUS=1
 		ORDER BY CHAT_TIME ASC
 
 	</select>
@@ -29,7 +44,7 @@
 	<insert id="addChat" parameterType="MessageVO">
 
 		INSERT INTO CHAT_TBL VALUES
-		(null,#{roomNum},#{sender},#{receiver},#{body},NOW())
+		(null,#{roomNum},#{sender},#{receiver},#{body},NOW(),#{status},0)
 
 
 	</insert>
@@ -37,16 +52,16 @@
 
 	<insert id="add" parameterType="java.util.List">
 		INSERT INTO CHAT_TBL
-		(CHAT_NUM,ROOM_NUM, SENDER, RECEIVER, BODY, CHAT_TIME)
+		(CHAT_NUM,ROOM_NUM, SENDER, RECEIVER, BODY, CHAT_TIME,STATUS)
 		VALUES
 		<foreach collection="list" item="item" separator=",">
 			(null,#{item.roomNum}, #{item.sender}, #{item.receiver},
-			#{item.body}, NOW())
+			#{item.body}, NOW(),#{status})
 		</foreach>
 	</insert>
 
 
-
+	
 
 
 

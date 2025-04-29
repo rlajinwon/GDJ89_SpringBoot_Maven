@@ -18,5 +18,6 @@ public class MessageVO {
 	private String receiver;
 	private String date;
 	private String status;
+	private boolean readStatus;
 
 }

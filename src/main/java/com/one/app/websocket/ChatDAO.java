@@ -18,4 +18,6 @@ public interface ChatDAO {
 	
 	int add(List<MessageVO> list) throws Exception;
 	
+	List<MessageVO> getMemoList(MessageVO messageVO)throws Exception;
+	
 }

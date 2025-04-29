@@ -43,6 +43,7 @@ public class ChatService {
 		if(list.size()==0) {
 			Calendar calendar = Calendar.getInstance();
 			messageVO.setRoomNum(calendar.getTimeInMillis());
+			messageVO.setStatus("1");
 			chatDAO.addChat(messageVO);
 			
 			

@@ -1,3 +1,44 @@
+const websocket = new WebSocket("/ws/chat")
+
+
+
+try{
+
+    const memoSend = document.getElementById("memoSend")
+    const memoContents = document.getElementById("memoContents")
+    const memoReceiver = document.getElementById("memoReceiver")
+
+    memoSend.addEventListener('click',()=>{
+
+        let m = new Message();
+        m.body = memoContents.value;
+        m.receiver = memoReceiver.value;
+        m.status="3"
+        m.date=new Date();
+        console.log("gggg")
+
+        websocket.send(JSON.stringify(m));
+    })
+
+
+}catch(e){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+try{
+
 
 const send = document.getElementById("send")
 const message = document.getElementById("message")
@@ -32,7 +73,8 @@ for(let r of receivername){
     })
 }
 
-const websocket = new WebSocket("/ws/chat")
+
+
 
 //webSocket 연결이 되었을 때
 websocket.onopen=()=>{
@@ -50,6 +92,25 @@ websocket.onmessage=(m)=>{
 
     let end = result.receiver();
 
+    let status = result.status;
+
+
+    //-------------------메모(쪽지)
+
+    if(status == "3"){
+        console.log(data);
+        alert(result.body);
+        makeMemo(data);
+        return;
+    }
+
+
+
+
+
+
+
+    //-------------------------1ㄷ1 채팅
     let my = chat.getAttribute("data-sender-name") // 내 정보
 
     let re = rec.value; // 현재 채팅하고 있는 상대방 정보 
@@ -95,6 +156,8 @@ function webSocketError(){
 
 }
 
+}catch(e){}
+
 
 //------------------------------------
 class Message {
@@ -115,3 +178,46 @@ function makeData(data){
     return div;
 
 }
+
+
+
+// 쪽지 출력 구조 
+
+function makeMemo(data) {
+    const a = document.createElement("a");
+    a.classList.add("dropdown-item", "d-flex", "align-items-center");
+    a.href = "#";
+
+    const imageDiv = document.createElement("div");
+    imageDiv.classList.add("dropdown-list-image", "mr-3");
+
+    const img = document.createElement("img");
+    img.classList.add("rounded-circle");
+    img.src = "https://source.unsplash.com/Mv9hjnEUHR4/60x60"; // 예시 이미지
+
+    const status = document.createElement("div");
+    status.classList.add("status-indicator", "bg-success");
+
+    imageDiv.appendChild(img);
+    imageDiv.appendChild(status);
+
+    const textDiv = document.createElement("div");
+
+    const bodyDiv = document.createElement("div");
+    bodyDiv.classList.add("text-truncate");
+    bodyDiv.innerText = data.body;
+
+    const infoDiv = document.createElement("div");
+    infoDiv.classList.add("small", "text-gray-500");
+    infoDiv.innerText = `${data.sender} · 지금`;
+
+    textDiv.appendChild(bodyDiv);
+    textDiv.appendChild(infoDiv);
+
+    a.appendChild(imageDiv);
+    a.appendChild(textDiv);
+
+    document.getElementById("memoAdd").before(a);
+}
+
+

@@ -62,38 +62,38 @@
 
 	
 	
-	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 	<!-- Chat Modal -->
-
-
+	
+	
 	<sec:authentication property="name" var="username" />
 	<div class="modal" tabindex="-1" id="chat" data-sender-name="${username}">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title">Modal title</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body">
-	        <div id="chat-body">
-				
-
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div id="chat-body">
+						
+						
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div>
+						<input type="hidden" id="receiver" value=""> <input type="text" id="message"><button id="send">Send</button>
+					</div>
+					<!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button> -->
+				</div>
 			</div>
 		</div>
-		<div class="modal-footer">
-			<div>
-			  <input type="hidden" id="receiver" value=""> <input type="text" id="message"><button id="send">Send</button>
-			</div>
-	        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button> -->
-	      </div>
-	    </div>
-	  </div>
 	</div>
 	
 	
 	<script src="/js/chat/chat.js"></script>	
+	<c:import url="/WEB-INF/views/templates/footer.jsp"></c:import>
 </body>
 </html>
